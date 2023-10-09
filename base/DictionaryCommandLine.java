@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class DictionaryCommandLine {
@@ -15,22 +16,26 @@ public class DictionaryCommandLine {
         management.InsertCommandLine();
         showAllWords();
     }
-    public void displayAdvance() {
-        DictionaryManagement management = new DictionaryManagement(dictionary);
+    public void displayAdvance() throws IOException {
         Scanner sc = new Scanner(System.in);
+        DictionaryManagement management = new DictionaryManagement(dictionary);
+        management.InsertFromFile("G:\\MY UET JOURNEY\\OOP-UET\\Dictionary_OOP\\dictionary.txt");
         System.out.println("Welcome to My Application!");
+        System.out.println("---------------------------------");
+        System.out.println("|--Select--|-------Option-------|");
+        System.out.println("|    0     |   Exit             |");
+        System.out.println("|    1     |   Add              |");
+        System.out.println("|    2     |   Remove           |");
+        System.out.println("|    3     |   Update           |");
+        System.out.println("|    4     |   Display          |");
+        System.out.println("|    5     |   Lookup           |");
+        System.out.println("|    6     |   Search           |");
+        System.out.println("|    7     |   Game             |");
+        System.out.println("|    8     |   Import form file |");
+        System.out.println("|    9     |   Export to file   |");
+        System.out.println("---------------------------------");
+        System.out.print("Your action: ");
         while (true) {
-            System.out.println("[0] Exit");
-            System.out.println("[1] Add");
-            System.out.println("[2] Remove");
-            System.out.println("[3] Update");
-            System.out.println("[4] Display");
-            System.out.println("[5] Lookup");
-            System.out.println("[6] Search");
-            System.out.println("[7] Game");
-            System.out.println("[8] Import from file");
-            System.out.println("[9] Export to file");
-            System.out.print("Your action: ");
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline character
 
@@ -42,9 +47,11 @@ public class DictionaryCommandLine {
                     management.InsertCommandLine();
                     break;
                 case 2:
-                    System.out.print("Enter the index of the word to remove: ");
-                    int indexToRemove = sc.nextInt();
-                    // dictionary.deleteWord(indexToRemove - 1);
+                    System.out.print("Enter the word to remove: ");
+                    String word = sc.nextLine();
+                    word = word.trim().replaceAll("\\s+","");
+                    word = word.substring(0,1) + word.substring(1);
+                    dictionary.removeWord(word);
                     break;
                 case 3:
                     System.out.print("Enter the index of the word to update: ");
@@ -63,8 +70,9 @@ public class DictionaryCommandLine {
                 case 5:
                     System.out.print("Enter a word to lookup: ");
                     String lookupWord = sc.nextLine();
-                    int pos = management.DictionaryLookUp(dictionary,lookupWord);
-                    System.out.println(dictionary.getWords().get(pos));
+                    lookupWord = lookupWord.trim().replaceAll("\\s+", "");
+                    lookupWord = lookupWord.substring(0,1).toUpperCase() + lookupWord.substring(1);
+                    System.out.println(management.DictionaryLookUp(lookupWord));
                     break;
                 case 6:
                     System.out.print("Enter a prefix to search: ");
@@ -76,19 +84,33 @@ public class DictionaryCommandLine {
                     System.out.println("This feature is under development.");
                     break;
                 case 8:
-                    System.out.print("Enter the file name to import from: ");
+                    /*System.out.print("Enter the file name to import from: ");
                     String importFileName = sc.nextLine();
-                    management.InsertFromFile(dictionary,importFileName);
+                    management.InsertFromFile(dictionary,importFileName);*/
                     break;
                 case 9:
-                    System.out.print("Enter the file name to export to: ");
+                 /*   System.out.print("Enter the file name to export to: ");
                     String exportFileName = sc.nextLine();
-                    management.DictionaryExportToFile(dictionary,exportFileName);
+                    management.DictionaryExportToFile(dictionary,exportFileName);*/
                     break;
                 default:
                     System.out.println("Action not supported.");
                     break;
             }
+            System.out.println("---------------------------------");
+            System.out.println("|--Select--|-------Option-------|");
+            System.out.println("|    0     |   Exit             |");
+            System.out.println("|    1     |   Add              |");
+            System.out.println("|    2     |   Remove           |");
+            System.out.println("|    3     |   Update           |");
+            System.out.println("|    4     |   Display          |");
+            System.out.println("|    5     |   Lookup           |");
+            System.out.println("|    6     |   Search           |");
+            System.out.println("|    7     |   Game             |");
+            System.out.println("|    8     |   Import form file |");
+            System.out.println("|    9     |   Export to file   |");
+            System.out.println("---------------------------------");
+            System.out.print("Your action: ");
 
         }
     }
@@ -101,7 +123,7 @@ public class DictionaryCommandLine {
         this.dictionary = dictionary;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Dictionary dic = new Dictionary();
         DictionaryCommandLine test = new DictionaryCommandLine(dic);
         test.displayAdvance();;

@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DictionaryManagement {
@@ -13,8 +14,15 @@ public class DictionaryManagement {
         this.dictionary = dictionary;
     }
 
+    public boolean validWord(String s) {
+        for (int i = 0; i < s.length(); ++i) {
+            if (!Character.isLetter(s.charAt(i))) return false;
+        }
+        return true;
+    }
+
     public DictionaryManagement() {
-        this.InsertCommandLine();
+        this.InsertFromFile("G:\\MY UET JOURNEY\\OOP-UET\\Dictionary_OOP\\dictionary.txt");
     }
 
     // function
@@ -52,8 +60,9 @@ public class DictionaryManagement {
     }
 
     public void addWord(Word word, String path) {
-        try (FileWriter fileWriter = new FileWriter(path, true);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+        try (
+                FileWriter fileWriter = new FileWriter(path, true);
+                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write("|" + word.getWord_target() + "\n" + word.getWord_explain());
             bufferedWriter.newLine();
         } catch (IOException e) {
@@ -72,6 +81,8 @@ public class DictionaryManagement {
         for (int i = 0; i < word_size; ++i) {
             System.out.print((i + 1) + ". English: ");
             String word_target = sc.nextLine();
+            word_target = word_target.trim().replaceAll("\\s+", "");
+            word_target = word_target.substring(0, 1).toUpperCase() + word_target.substring(1);
             System.out.print("   Vietnamese: ");
             String word_explain = sc.nextLine();
             Word _word = new Word(word_target, word_explain);
@@ -79,27 +90,22 @@ public class DictionaryManagement {
         }
     }
 
-    public void InsertFromFile(Dictionary dictionary, String path) {
+    public void InsertFromFile(String path) {
         try {
             FileReader fileReader = new FileReader(path);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String englishWord = bufferedReader.readLine();
-            englishWord = englishWord.replace("|", "");
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                Word word = new Word();
-                word.setWord_target(englishWord.trim());
-                String meaning = line + "\n";
-                while ((line = bufferedReader.readLine()) != null)
-                    if (!line.startsWith("|")) meaning += line + "\n";
-                    else {
-                        englishWord = line.replace("|", "");
-                        break;
+            while (bufferedReader.ready()) {
+                String lineWord = bufferedReader.readLine();
+                String[] parts = lineWord.split("\t");
+                if (parts.length == 2) {
+                    if (!validWord(parts[0])) {
+                        System.out.println(parts[0] + " is not English Word" + ". So that, cannot import word to dictionary");
+                    } else {
+                        dictionary.addWords(new Word(parts[0], parts[1]));
                     }
-                word.setWord_explain(meaning.trim());
-                dictionary.addWords(word);
+                }
             }
-            bufferedReader.close();
+            fileReader.close();
         } catch (IOException e) {
             System.out.println("An error occur with file: " + e);
         } catch (Exception e) {
@@ -108,21 +114,11 @@ public class DictionaryManagement {
     }
 
     //LockUP
-    public int DictionaryLookUp(Dictionary dictionary, String keyWord) {
-        try {
-            dictionary.SortWord();
-            int left = 0;
-            int right = dictionary.getWords().size() - 1;
-            while (left <= right) {
-                int mid = left + (right - left) / 2;
-                int ans = dictionary.getWords().get(mid).getWord_target().compareTo(keyWord);
-                if (ans == 0) return mid;
-                if (ans <= 0) left = mid + 1;
-                else right = mid - 1;
-            }
-        } catch (NullPointerException e) {
-            System.out.println("Null exception");
-        }
-        return -1;
+    public String DictionaryLookUp(String English) throws IOException {
+        return dictionary.searchWord(English);
+    }
+
+    public void removeWord(String English) {
+        dictionary.removeWord(English);
     }
 }
