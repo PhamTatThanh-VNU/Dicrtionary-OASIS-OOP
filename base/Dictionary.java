@@ -1,30 +1,39 @@
-import java.sql.SQLOutput;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class Dictionary extends Word {
     private ArrayList<Word> words = new ArrayList<Word>();
-    private Trie trieToStore;
+    private TreeBinary trieToStore;
 
-    public Trie getTrieToStore() {
+    public TreeBinary getTrieToStore() {
         return trieToStore;
     }
 
-    public void setTrieToStore(Trie trieToStore) {
+    public void setTrieToStore(TreeBinary trieToStore) {
         this.trieToStore = trieToStore;
     }
 
     //initialize
     public Dictionary() {
         words = new ArrayList<>();
-        trieToStore = new Trie();
+        trieToStore = new TreeBinary();
     }
 
-    //func
+    //Function
+    public void UpdateWord(String word_target,String update_word_explain){
+        for(Word word : words){
+            if(word.getWord_target().equals(word_target)){
+                word.setWord_explain(update_word_explain);
+                System.out.println("Update successfully!");
+                return;
+            }
+        }
+        System.out.println("Word not found , update word failed!");
+    }
     public void addWords(Word word) {
-        words.add(word);
+
         if (trieToStore.search(word).equals("Cannot find word in Dictionary.")) {
             trieToStore.insert(word);
+            words.add(word);
         } else {
             System.out.println("Vocab has existed!");
             return;
@@ -32,9 +41,9 @@ public class Dictionary extends Word {
     }
 
     public void removeWord(String English) {
-        trieToStore.remove(English);
         for (int i = 0; i < words.size(); ++i){
             if(words.get(i).getWord_target().equals(English)){
+                trieToStore.remove(English);
                 words.remove(i);
                 System.out.println("Remove successfully");
                 return;

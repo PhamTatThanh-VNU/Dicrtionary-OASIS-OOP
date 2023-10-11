@@ -49,20 +49,11 @@ public class DictionaryCommandLine {
                 case 2:
                     System.out.print("Enter the word to remove: ");
                     String word = sc.nextLine();
-                    word = word.trim().replaceAll("\\s+","");
-                    word = word.substring(0,1) + word.substring(1);
+                    word = management.StandardizedWord(word);
                     dictionary.removeWord(word);
                     break;
                 case 3:
-                    System.out.print("Enter the index of the word to update: ");
-                    int indexToUpdate = sc.nextInt();
-                    sc.nextLine(); // Consume the newline character
-                    System.out.print("English: ");
-                    String updatedWordTarget = sc.nextLine();
-                    System.out.print("Vietnamese: ");
-                    String updatedWordExplain = sc.nextLine();
-                    Word updatedWord = new Word(updatedWordTarget, updatedWordExplain);
-                    //dictionary.updateWord(indexToUpdate - 1, updatedWord);
+                    management.UpdateWordFromCommandLine();
                     break;
                 case 4:
                     showAllWords();
@@ -70,28 +61,27 @@ public class DictionaryCommandLine {
                 case 5:
                     System.out.print("Enter a word to lookup: ");
                     String lookupWord = sc.nextLine();
-                    lookupWord = lookupWord.trim().replaceAll("\\s+", "");
-                    lookupWord = lookupWord.substring(0,1).toUpperCase() + lookupWord.substring(1);
+                    lookupWord = management.StandardizedWord(lookupWord);
                     System.out.println(management.DictionaryLookUp(lookupWord));
                     break;
                 case 6:
-                    System.out.print("Enter a prefix to search: ");
+                    System.out.print("Enter a keyword you want to search: ");
                     String searchPrefix = sc.nextLine();
-                    // management.dictionarySearcher(searchPrefix);
+                    management.dictionarySearcher(searchPrefix);
                     break;
                 case 7:
                     // Add your game logic here (trivia game, flashcards, etc.)
                     System.out.println("This feature is under development.");
                     break;
                 case 8:
-                    /*System.out.print("Enter the file name to import from: ");
-                    String importFileName = sc.nextLine();
-                    management.InsertFromFile(dictionary,importFileName);*/
+                    System.out.print("Enter the exact the filePath you want to import: ");
+                    String importFilePath = sc.nextLine();
+                    management.dictionaryImportFromFile(importFilePath);
                     break;
                 case 9:
-                 /*   System.out.print("Enter the file name to export to: ");
-                    String exportFileName = sc.nextLine();
-                    management.DictionaryExportToFile(dictionary,exportFileName);*/
+                    System.out.print("Enter the exact the filePath you want to export: ");
+                    String exportFilePath = sc.nextLine();
+                    management.dictionaryExportToFile(exportFilePath);
                     break;
                 default:
                     System.out.println("Action not supported.");
