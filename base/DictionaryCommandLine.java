@@ -11,6 +11,10 @@ public class DictionaryCommandLine {
     public void showAllWords(){
         dictionary.DisplayAllWord();
     }
+    public void hangMan () {
+        Game dictionaryGame = new Game(dictionary);
+        dictionaryGame.HangMan();
+    }
     public void DictionaryBasic(){
         DictionaryManagement management = new DictionaryManagement(dictionary);
         management.InsertCommandLine();
@@ -19,7 +23,7 @@ public class DictionaryCommandLine {
     public void displayAdvance() throws IOException {
         Scanner sc = new Scanner(System.in);
         DictionaryManagement management = new DictionaryManagement(dictionary);
-        management.InsertFromFile("G:\\MY UET JOURNEY\\OOP-UET\\Dictionary_OOP\\dictionary.txt");
+        management.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary-Final\\dictionary.txt");
         System.out.println("Welcome to My Application!");
         System.out.println("---------------------------------");
         System.out.println("|--Select--|-------Option-------|");
@@ -71,7 +75,8 @@ public class DictionaryCommandLine {
                     break;
                 case 7:
                     // Add your game logic here (trivia game, flashcards, etc.)
-                    System.out.println("This feature is under development.");
+                    //System.out.println("This feature is under development.");
+                    hangMan();
                     break;
                 case 8:
                     System.out.print("Enter the exact the filePath you want to import: ");

@@ -11,7 +11,7 @@ public class DictionaryManagement {
         this.dictionary = dictionary;
     }
 
-    public String StandardizedWord(String english) {
+    public static String StandardizedWord(String english) {
         english = english.toLowerCase();
         english = english.trim().replaceAll("\\s+", "");
         english = english.substring(0, 1).toUpperCase() + english.substring(1);
@@ -26,7 +26,7 @@ public class DictionaryManagement {
     }
 
     public DictionaryManagement() {
-        this.InsertFromFile("G:\\MY UET JOURNEY\\OOP-UET\\Dictionary_OOP\\dictionary.txt");
+        this.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary-Final\\dictionary.txt");
     }
 
     //Function
