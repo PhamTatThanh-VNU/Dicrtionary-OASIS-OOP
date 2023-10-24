@@ -2,28 +2,27 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class DictionaryCommandLine {
-    private Dictionary dictionary;
-    //constructor
-    public DictionaryCommandLine(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    private static DictionaryCommandLine dc = null;
+    private DictionaryCommandLine() {
     }
-    //Func
-    public void showAllWords(){
-        dictionary.DisplayAllWord();
+
+    public static synchronized DictionaryCommandLine getInstance()
+    {
+        if (dc == null)
+            dc = new DictionaryCommandLine();
+
+        return dc;
     }
-    public void hangMan () {
-        Game dictionaryGame = new Game(dictionary);
-        dictionaryGame.HangMan();
+    public static void showAllWords(){
+        Dictionary.getInstance().DisplayAllWord();
     }
-    public void DictionaryBasic(){
-        DictionaryManagement management = new DictionaryManagement(dictionary);
-        management.InsertCommandLine();
-        showAllWords();
+    public static void hangMan() {
+        Game.getInstance().HangMan();
     }
-    public void displayAdvance() throws IOException {
+    public static void displayAdvance() throws IOException {
         Scanner sc = new Scanner(System.in);
-        DictionaryManagement management = new DictionaryManagement(dictionary);
-        management.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary-Final\\dictionary.txt");
+        //DictionaryManagement management = new DictionaryManagement(dictionary);
+        DictionaryManagement.getInstance().InsertFromFile("D:\\Dictionary-OASIS-OOP\\dictionary.txt");
         System.out.println("Welcome to My Application!");
         System.out.println("---------------------------------");
         System.out.println("|--Select--|-------Option-------|");
@@ -48,16 +47,16 @@ public class DictionaryCommandLine {
                     System.out.println("Goodbye!");
                     return;
                 case 1:
-                    management.InsertCommandLine();
+                    DictionaryManagement.getInstance().InsertCommandLine();
                     break;
                 case 2:
                     System.out.print("Enter the word to remove: ");
                     String word = sc.nextLine();
-                    word = management.StandardizedWord(word);
-                    dictionary.removeWord(word);
+                    word = DictionaryManagement.getInstance().StandardizedWord(word);
+                    Dictionary.getInstance().removeWord(word);
                     break;
                 case 3:
-                    management.UpdateWordFromCommandLine();
+                    DictionaryManagement.getInstance().UpdateWordFromCommandLine();
                     break;
                 case 4:
                     showAllWords();
@@ -65,28 +64,28 @@ public class DictionaryCommandLine {
                 case 5:
                     System.out.print("Enter a word to lookup: ");
                     String lookupWord = sc.nextLine();
-                    lookupWord = management.StandardizedWord(lookupWord);
-                    System.out.println(management.DictionaryLookUp(lookupWord));
+                    lookupWord = DictionaryManagement.getInstance().StandardizedWord(lookupWord);
+                    System.out.println(DictionaryManagement.getInstance().DictionaryLookUp(lookupWord));
                     break;
                 case 6:
                     System.out.print("Enter a keyword you want to search: ");
                     String searchPrefix = sc.nextLine();
-                    management.dictionarySearcher(searchPrefix);
+                    DictionaryManagement.getInstance().dictionarySearcher(searchPrefix);
                     break;
                 case 7:
                     // Add your game logic here (trivia game, flashcards, etc.)
                     //System.out.println("This feature is under development.");
-                    hangMan();
+                    hangMan(); // cai nay cung phai sua
                     break;
                 case 8:
                     System.out.print("Enter the exact the filePath you want to import: ");
                     String importFilePath = sc.nextLine();
-                    management.dictionaryImportFromFile(importFilePath);
+                    DictionaryManagement.getInstance().dictionaryImportFromFile(importFilePath);
                     break;
                 case 9:
                     System.out.print("Enter the exact the filePath you want to export: ");
                     String exportFilePath = sc.nextLine();
-                    management.dictionaryExportToFile(exportFilePath);
+                    DictionaryManagement.getInstance().dictionaryExportToFile(exportFilePath);
                     break;
                 default:
                     System.out.println("Action not supported.");
@@ -109,19 +108,11 @@ public class DictionaryCommandLine {
 
         }
     }
-    //set get
-    public Dictionary getDictionary() {
-        return dictionary;
-    }
 
-    public void setDictionary(Dictionary dictionary) {
-        this.dictionary = dictionary;
-    }
+
 
     public static void main(String[] args) throws IOException {
-        Dictionary dic = new Dictionary();
-        DictionaryCommandLine test = new DictionaryCommandLine(dic);
-        test.displayAdvance();;
+        DictionaryCommandLine.displayAdvance();
     }
 
 }

@@ -4,13 +4,19 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DictionaryManagement {
-    private Dictionary dictionary;
+    private static DictionaryManagement dm = null;
 
     //constructor insert from command or insert from file
-    public DictionaryManagement(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    private DictionaryManagement() {
     }
 
+    public static synchronized DictionaryManagement getInstance()
+    {
+        if (dm == null)
+            dm = new DictionaryManagement();
+
+        return dm;
+    }
     public static String StandardizedWord(String english) {
         english = english.toLowerCase();
         english = english.trim().replaceAll("\\s+", "");
@@ -24,11 +30,6 @@ public class DictionaryManagement {
         }
         return true;
     }
-
-    public DictionaryManagement() {
-        this.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary-Final\\dictionary.txt");
-    }
-
     //Function
     public void UpdateWordFromCommandLine() {
         Scanner sc = new Scanner(System.in);
@@ -37,7 +38,7 @@ public class DictionaryManagement {
         word_target = StandardizedWord(word_target);
         System.out.print("Enter the update word_explain: ");
         String update_word_explain = sc.nextLine();
-        dictionary.UpdateWord(word_target, update_word_explain);
+        Dictionary.getInstance().UpdateWord(word_target, update_word_explain);
     }
 
     public void InsertCommandLine() {
@@ -54,7 +55,7 @@ public class DictionaryManagement {
             System.out.print("   Vietnamese: ");
             String word_explain = sc.nextLine();
             Word _word = new Word(word_target, word_explain);
-            dictionary.addWords(_word);
+            Dictionary.getInstance().addWords(_word);
         }
     }
 
@@ -69,7 +70,7 @@ public class DictionaryManagement {
                     if (!validWord(parts[0])) {
                         System.out.println(parts[0] + " is not English Word" + ". So that, cannot import word to dictionary");
                     } else {
-                        dictionary.addWords(new Word(parts[0], parts[1]));
+                        Dictionary.getInstance().addWords(new Word(parts[0], parts[1]));
                     }
                 }
             }
@@ -83,13 +84,13 @@ public class DictionaryManagement {
 
     //LockUP
     public String DictionaryLookUp(String English) throws IOException {
-        return dictionary.searchWord(English);
+        return Dictionary.getInstance().searchWord(English);
     }
 
     public void dictionarySearcher(String keyword) {
         List<Word> searchResults = new ArrayList<>();
 
-        for (Word word : dictionary.getWords()) {
+        for (Word word : Dictionary.getInstance().getWords()) {
             if (word.getWord_target().startsWith(keyword) || word.getWord_target().toLowerCase().contains(keyword)) {
                 searchResults.add(word);
             }
@@ -107,7 +108,7 @@ public class DictionaryManagement {
     public void dictionaryExportToFile(String filePath) {
         try {
             FileWriter file = new FileWriter(filePath);
-            for (Word word : dictionary.getWords()) {
+            for (Word word : Dictionary.getInstance().getWords()) {
                 String line = word.getWord_target() + "\t" + word.getWord_explain() + "\n";
                 file.write(line);
             }
@@ -128,7 +129,7 @@ public class DictionaryManagement {
                     String word_target = parts[0];
                     String word_explain = parts[1];
                     Word word = new Word(word_target, word_explain);
-                    dictionary.addWords(word);
+                    Dictionary.getInstance().addWords(word);
                 }
             }
             scanner.close();
@@ -139,6 +140,6 @@ public class DictionaryManagement {
     }
 
     public void removeWord(String English) {
-        dictionary.removeWord(English);
+        Dictionary.getInstance().removeWord(English);
     }
 }

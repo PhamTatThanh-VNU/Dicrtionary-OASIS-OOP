@@ -4,16 +4,20 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-    private Dictionary dictionary;
-
-    public Game(Dictionary dictionary) {
-        this.dictionary = dictionary;
+    private static Game g = null;
+    private Game() {
     }
+    public static synchronized Game getInstance()
+    {
+        if (g == null)
+            g = new Game();
 
+        return g;
+    }
     // lay random ket qua
     public Word randomWord() {
         Random rand = new Random();
-        ArrayList<Word> words = dictionary.getWords();
+        ArrayList<Word> words = Dictionary.getInstance().getWords();
         return words.get(rand.nextInt(words.size()));
     }
 

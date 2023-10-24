@@ -5,11 +5,17 @@ import java.util.LinkedList;
 
 public class Dictionary extends Word {
     private ArrayList<Word> words = new ArrayList<>();
-
+    private static Dictionary d = null;
 
     //initialize
-    public Dictionary() {
+    private Dictionary() {
         words = new ArrayList<>();
+    }
+    public static synchronized Dictionary getInstance(){
+        if (d == null)
+            d = new Dictionary();
+
+        return d;
     }
 
     public static void sortArrayList(ArrayList<Word> arrayList) {
