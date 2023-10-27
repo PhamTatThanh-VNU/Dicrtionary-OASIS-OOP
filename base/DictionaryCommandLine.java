@@ -75,7 +75,7 @@ public class DictionaryCommandLine {
                 case 7:
                     // Add your game logic here (trivia game, flashcards, etc.)
                     //System.out.println("This feature is under development.");
-                    hangMan(); // cai nay cung phai sua
+                    hangMan();
                     break;
                 case 8:
                     System.out.print("Enter the exact the filePath you want to import: ");

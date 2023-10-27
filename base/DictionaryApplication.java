@@ -8,12 +8,8 @@ import java.io.IOException;
 public class DictionaryApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(DictionaryApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(DictionaryApplication.class.getResource("hello.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 770, 590);
-        stage.setMaxHeight(590);
-        stage.setMaxWidth(770);
-        stage.setMinHeight(590);
-        stage.setMinWidth(770);
         stage.setTitle("Dictionary");
         stage.setScene(scene);
         stage.show();
