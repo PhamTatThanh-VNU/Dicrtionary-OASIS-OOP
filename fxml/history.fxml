@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="480.0" prefWidth="720.0" styleClass="anchor" stylesheets="@../css/test.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HistoryController">
+   <children>
+            <Button fx:id="delete" layoutX="632.0" layoutY="14.0" mnemonicParsing="false" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/delete.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <ListView fx:id="listView" layoutX="70.0" layoutY="84.0" prefHeight="361.0" prefWidth="302.0" />
+            <WebView fx:id="webView" layoutX="388.0" layoutY="84.0" prefHeight="362.0" prefWidth="318.0" />
+            <Label layoutX="70.0" layoutY="14.0" prefHeight="52.0" prefWidth="302.0" text="Lịch sử" textFill="RED">
+               <font>
+                  <Font size="30.0" />
+               </font></Label>
+<AnchorPane prefHeight="480.0" prefWidth="60.0" styleClass="anchor2" stylesheets="@../css/test.css">
+<children>
+    <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../image/dictionary.png" />
+        </image>
+    </ImageView>
+    <Button fx:id="st" layoutX="4.0" layoutY="414.0" maxHeight="52.0" maxWidth="52.0" minHeight="52.0" minWidth="52.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/settings.png" />
+                </image></ImageView>
+        </graphic></Button>
+    <Button fx:id="sql" layoutX="4.0" layoutY="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/loupe.png" />
+                </image></ImageView>
+        </graphic></Button>
+    <Button fx:id="google" layoutX="4.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/translate.png" />
+                </image></ImageView>
+        </graphic></Button>
+    <Button fx:id="add" layoutX="4.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/plus.png" />
+                </image></ImageView>
+        </graphic></Button>
+    <Button layoutX="4.0" layoutY="215.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/history.png" />
+                </image></ImageView>
+        </graphic></Button>
+    <Button fx:id="star" layoutX="4.0" layoutY="260.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+        <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@../image/star.png" />
+                </image></ImageView>
+        </graphic></Button>
+</children></AnchorPane>
+   </children>
+</AnchorPane>

@@ -9,15 +9,9 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 
 
-//inheritence
 
 public class TextToSpeed {
-    */
-/**
-     * Convert English input {@code text} to voice and play it with Google Translator TTS API
-     *
-     * @param text The text to be converted to voice in English
-     *//*
+
 
     public static void playSoundGoogleTranslateEnToVi(String text) {
         try {
@@ -37,12 +31,7 @@ public class TextToSpeed {
         }
     }
 
-    */
-/**
-     * Convert Vietnamese input {@code text} to voice and play it with Google Translator TTS API
-     *
-     * @param text The text to be converted to voice in Vietnamese
-     *//*
+
 
     public static void playSoundGoogleTranslateViToEn(String text) {
         try {
@@ -62,5 +51,4 @@ public class TextToSpeed {
         }
     }
 }
-
 */

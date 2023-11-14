@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane prefHeight="480.0" prefWidth="720.0" styleClass="anchor" stylesheets="@../css/test.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DictionaryController">
+   <children>
+      <AnchorPane prefHeight="480.0" prefWidth="60.0" styleClass="anchor2" stylesheets="@../css/test.css">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../image/dictionary.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="st" layoutX="4.0" layoutY="414.0" maxHeight="52.0" maxWidth="52.0" minHeight="52.0" minWidth="52.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/settings.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button layoutX="4.0" layoutY="80.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/loupe.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button fx:id="google" layoutX="4.0" layoutY="125.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/translate.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button fx:id="add" layoutX="4.0" layoutY="170.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/plus.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button fx:id="his" layoutX="4.0" layoutY="215.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/history.png" />
+                     </image></ImageView>
+               </graphic></Button>
+            <Button fx:id="star" layoutX="4.0" layoutY="260.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/star.png" />
+                     </image></ImageView>
+               </graphic></Button>
+         </children></AnchorPane>
+      <TextField fx:id="searchBar" layoutX="70.0" layoutY="29.0" prefHeight="40.0" prefWidth="239.0" promptText="Nhập từ cần tìm" />
+      <Button fx:id="searchButton" layoutX="316.0" layoutY="29.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" text="Button" />
+      <ListView fx:id="listView" layoutX="70.0" layoutY="84.0" prefHeight="361.0" prefWidth="302.0" />
+      <WebView fx:id="webView" layoutX="388.0" layoutY="84.0" prefHeight="362.0" prefWidth="325.0" />
+      <ButtonBar layoutX="368.0" layoutY="29.0" prefHeight="55.0" prefWidth="343.0">
+         <buttons>
+            <Button fx:id="delete" minWidth="18.0" mnemonicParsing="false" prefHeight="52.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/delete.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="mark" mnemonicParsing="false" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fx:id="mark_img" fitHeight="43.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/star2.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="edit" mnemonicParsing="false" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/edit.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="speaker" minWidth="51.0" mnemonicParsing="false" prefHeight="55.0" styleClass="button1" stylesheets="@../css/test.css">
+               <graphic>
+                  <ImageView fitHeight="47.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../image/sound.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </buttons>
+      </ButtonBar>
+   </children>
+</AnchorPane>
