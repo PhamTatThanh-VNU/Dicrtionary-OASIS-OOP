@@ -6,14 +6,17 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 class Translator {
+    static StringBuilder response;
+    static URL url;
+    static String urlStr;
     public static String translate(String langFrom, String langTo, String text) throws IOException {
         // INSERT YOU URL HERE
-        String urlStr = "https://script.google.com/macros/s/AKfycbwrpYd0RlHsg5mgpeYXm4Qta8fiPfVqppC_jbRTmzDyRtdhUzWd0dP7ilsrfNpmYQ4gvQ/exec" +
+        urlStr = "https://script.google.com/macros/s/AKfycbwrpYd0RlHsg5mgpeYXm4Qta8fiPfVqppC_jbRTmzDyRtdhUzWd0dP7ilsrfNpmYQ4gvQ/exec" +
                 "?q=" + URLEncoder.encode(text, "UTF-8") +
                 "&target=" + langTo +
                 "&source=" + langFrom;
-        URL url = new URL(urlStr);
-        StringBuilder response = new StringBuilder();
+        url = new URL(urlStr);
+        response = new StringBuilder();
         HttpURLConnection con = (HttpURLConnection) url.openConnection();
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));

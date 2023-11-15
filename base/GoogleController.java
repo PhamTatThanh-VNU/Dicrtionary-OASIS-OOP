@@ -33,9 +33,33 @@ public class GoogleController implements Initializable {
     private Button star;
     @FXML
     private Button his;
+    @FXML
+    private TextArea textArea1;
+    @FXML
+    private TextArea textArea2;
+    @FXML
+    private Button trans;
+    @FXML
+    private Button change;
+    @FXML
+    private Label e;
+    @FXML
+    private Label v;
+    boolean vie = false;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        change.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event)  {
+                double a = e.getLayoutX();
+                double b = e.getLayoutY();
+                e.setLayoutX(v.getLayoutX());
+                e.setLayoutY(v.getLayoutY());
+                v.setLayoutY(b);
+                v.setLayoutX(a);
+                vie = !vie;
+            }
+        });
         his.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)  {
@@ -53,6 +77,7 @@ public class GoogleController implements Initializable {
                 stage.show();
             }
         });
+
         st.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event)  {
@@ -85,6 +110,18 @@ public class GoogleController implements Initializable {
                 stage.setTitle("Dictionary");
                 stage.setScene(scene);
                 stage.show();
+            }
+        });
+        trans.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event)  {
+                try {
+                    if(!vie)
+                    textArea2.setText(Translator.translate("en","vi",textArea1.getText()));
+                    else textArea2.setText(Translator.translate("vi","en",textArea1.getText()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         add.setOnAction(new EventHandler<ActionEvent>() {

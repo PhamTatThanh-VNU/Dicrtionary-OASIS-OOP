@@ -8,6 +8,7 @@ public class Dictionary extends Word {
     private static Dictionary d = null;
 
     //initialize
+
     private Dictionary() {
         words = new ArrayList<>();
     }
