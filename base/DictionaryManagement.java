@@ -26,7 +26,7 @@ public class DictionaryManagement {
     }
 
     public DictionaryManagement() {
-        this.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary-Final\\dictionary.txt");
+        this.InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary_fix\\dictionary.txt");
     }
 
     //Function
