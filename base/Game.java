@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Game {
+public class Game implements GameBase {
     private static Game g = null;
     private Game() {
     }

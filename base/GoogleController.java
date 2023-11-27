@@ -34,6 +34,8 @@ public class GoogleController implements Initializable {
     @FXML
     private Button his;
     @FXML
+    private Button game;
+    @FXML
     private TextArea textArea1;
     @FXML
     private TextArea textArea2;
@@ -154,6 +156,23 @@ public class GoogleController implements Initializable {
                 Stage stage =(Stage) star.getScene().getWindow();
                 stage.setResizable(false);
                 stage.setTitle("Dictionary");
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
+        game.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader fxmlLoader = new FXMLLoader(DictionaryApplication.class.getResource("fxml/menu.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 720, 480);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage stage = (Stage) game.getScene().getWindow();
+                stage.setResizable(false);
+                stage.setTitle("Hangman Game");
                 stage.setScene(scene);
                 stage.show();
             }

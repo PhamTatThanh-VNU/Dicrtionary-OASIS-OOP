@@ -46,6 +46,8 @@ public class DictionaryController implements Initializable {
     @FXML
     private Button star;
     @FXML
+    private Button game;
+    @FXML
     private WebView webView;
     @FXML
     private ListView listView;
@@ -178,9 +180,9 @@ public class DictionaryController implements Initializable {
                             speaker.setVisible(true);
                         }
                         if(definition != null){
-                        definition = definition.replace("\"", "\\\"");
-                        test = "insert into history values(\"" + temp + "\",\"" + definition + "\",current_timestamp());";
-                        con.createStatement().executeUpdate(test);
+                            definition = definition.replace("\"", "\\\"");
+                            test = "insert into history values(\"" + temp + "\",\"" + definition + "\",current_timestamp());";
+                            con.createStatement().executeUpdate(test);
                         }
                     } catch (Exception e) {
                         throw new RuntimeException(e);
@@ -248,61 +250,61 @@ public class DictionaryController implements Initializable {
         searchBar.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-                    if(event.getCode() == KeyCode.ENTER) {
-                        temp = searchBar.getText();
-                        webView.getEngine().loadContent("");
-                        searchBar.clear();
-                        temp = temp.toLowerCase();
-                        test = "select * from starred where target = \"" + temp + "\";";
-                        try {
-                            rset = con.createStatement().executeQuery(test);
-                            if(rset.next()){
-                                m =true;
-                                mark_img.setImage(new Image(".\\image\\star3.png"));
-                            } else {
-                                m = false;
-                                mark_img.setImage(new Image(".\\image\\star2.png"));
-                            }
-                        } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                if(event.getCode() == KeyCode.ENTER) {
+                    temp = searchBar.getText();
+                    webView.getEngine().loadContent("");
+                    searchBar.clear();
+                    temp = temp.toLowerCase();
+                    test = "select * from starred where target = \"" + temp + "\";";
+                    try {
+                        rset = con.createStatement().executeQuery(test);
+                        if(rset.next()){
+                            m =true;
+                            mark_img.setImage(new Image(".\\image\\star3.png"));
+                        } else {
+                            m = false;
+                            mark_img.setImage(new Image(".\\image\\star2.png"));
                         }
-                        test ="select definition from dictionary where target = \""+ temp + "\";";
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    test ="select definition from dictionary where target = \""+ temp + "\";";
+                    try {
+                        definition = null;
+                        rset = con.createStatement().executeQuery(test);
+                        while (rset.next()) {   // Repeatedly process each row
+                            definition = rset.getString("definition");       // retrieve a 'int'-cell in the row
+                            webView.getEngine().loadContent(definition);
+                        }
+                        test = "insert into history values(\"" + temp +"\",\""+ definition +"\",current_timestamp());";
+                        //System.out.println(test);
+                        con.createStatement().executeUpdate(test);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                } else if( event.getCode().isLetterKey() || event.getCode().isDigitKey() || (searchBar.getText() != null && event.getCode() == KeyCode.BACK_SPACE)){
+                    listView.getItems().clear();
+                    String keyword = searchBar.getText() + event.getText();
+                    keyword = keyword.toLowerCase();
+                    if(!keyword.isEmpty()) {
+                        if (Mode.equals("Chứa từ khóa cần tìm")) {
+                            test = "select target from dictionary where target like \"%" + keyword + "%\" "  + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
+                        } else if (Mode.equals("Truy vấn bằng hậu tố")) {
+                            test = "select target from dictionary where target like \"" + keyword + "%\" "  + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
+                        } else {
+                            test = "select target from dictionary where target like \"%" + keyword + "\" "   + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
+                        }
                         try {
-                            definition = null;
                             rset = con.createStatement().executeQuery(test);
                             while (rset.next()) {   // Repeatedly process each row
-                                definition = rset.getString("definition");       // retrieve a 'int'-cell in the row
-                                webView.getEngine().loadContent(definition);
+                                String target = rset.getString("target");
+                                listView.getItems().add(target);
                             }
-                            test = "insert into history values(\"" + temp +"\",\""+ definition +"\",current_timestamp());";
-                            //System.out.println(test);
-                            con.createStatement().executeUpdate(test);
                         } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-                    } else if( event.getCode().isLetterKey() || event.getCode().isDigitKey() || (searchBar.getText() != null && event.getCode() == KeyCode.BACK_SPACE)){
-                        listView.getItems().clear();
-                        String keyword = searchBar.getText() + event.getText();
-                        keyword = keyword.toLowerCase();
-                        if(!keyword.isEmpty()) {
-                            if (Mode.equals("Chứa từ khóa cần tìm")) {
-                                test = "select target from dictionary where target like \"%" + keyword + "%\" "  + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
-                            } else if (Mode.equals("Truy vấn bằng hậu tố")) {
-                                test = "select target from dictionary where target like \"" + keyword + "%\" "  + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
-                            } else {
-                                test = "select target from dictionary where target like \"%" + keyword + "\" "   + "order by target asc " + (Mode2.equals("No limit")?"":Mode2) + ";";
-                            }
-                            try {
-                                rset = con.createStatement().executeQuery(test);
-                                while (rset.next()) {   // Repeatedly process each row
-                                    String target = rset.getString("target");
-                                    listView.getItems().add(target);
-                                }
-                            } catch (Exception e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
                     }
+                }
             }
         });
         st.setOnAction(new EventHandler<ActionEvent>() {
@@ -386,6 +388,24 @@ public class DictionaryController implements Initializable {
                 Stage stage =(Stage) star.getScene().getWindow();
                 stage.setResizable(false);
                 stage.setTitle("Dictionary");
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
+
+        game.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader fxmlLoader = new FXMLLoader(DictionaryApplication.class.getResource("fxml/menu.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 720, 480);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage stage = (Stage) game.getScene().getWindow();
+                stage.setResizable(false);
+                stage.setTitle("Hangman Game");
                 stage.setScene(scene);
                 stage.show();
             }

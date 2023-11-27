@@ -22,7 +22,7 @@ public class DictionaryCommandLine {
     public static void displayAdvance() throws IOException {
         Scanner sc = new Scanner(System.in);
         //DictionaryManagement management = new DictionaryManagement(dictionary);
-        DictionaryManagement.getInstance().InsertFromFile("D:\\Dictionary-OASIS-OOP\\dictionary.txt");
+        DictionaryManagement.getInstance().InsertFromFile("D:\\UET\\OOP\\Dictionary-OASIS-OOP\\dictionary.txt");
         System.out.println("Welcome to My Application!");
         System.out.println("---------------------------------");
         System.out.println("|--Select--|-------Option-------|");

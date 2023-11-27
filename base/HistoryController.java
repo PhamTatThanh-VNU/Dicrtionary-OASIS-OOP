@@ -36,6 +36,8 @@ public class HistoryController implements Initializable {
     @FXML
     private Button google;
     @FXML
+    private Button game;
+    @FXML
     private WebView webView;
     @FXML
     private ListView listView;
@@ -184,6 +186,23 @@ public class HistoryController implements Initializable {
                 Stage stage =(Stage) star.getScene().getWindow();
                 stage.setResizable(false);
                 stage.setTitle("Dictionary");
+                stage.setScene(scene);
+                stage.show();
+            }
+        });
+        game.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                FXMLLoader fxmlLoader = new FXMLLoader(DictionaryApplication.class.getResource("fxml/menu.fxml"));
+                Scene scene = null;
+                try {
+                    scene = new Scene(fxmlLoader.load(), 720, 480);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage stage = (Stage) game.getScene().getWindow();
+                stage.setResizable(false);
+                stage.setTitle("Hangman Game");
                 stage.setScene(scene);
                 stage.show();
             }
