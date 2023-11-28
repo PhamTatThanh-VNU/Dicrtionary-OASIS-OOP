@@ -97,9 +97,8 @@ public class GameController implements GameBase {
         });
     }
 
-
-    int random = new Random().nextInt(words.size());
     Word rand = randomWord();
+    String answer = rand.getWord_target();
     String word_hint = rand.getWord_target() + " " + rand.getWord_explain();
     String[] split = word_hint.split(" ", 2);
     String word = split[0];
@@ -108,7 +107,6 @@ public class GameController implements GameBase {
 
 
     public void initialize() throws Exception {
-
         setHint();
     }
 
@@ -177,7 +175,7 @@ public class GameController implements GameBase {
             tf8.setText(str);
         guessedCharacterCount++;
 
-        if (guessedCharacterCount == letter_size) {
+        if (guessedCharacterCount == letter_size && life > 1) {
             showWin();
         }
     }
@@ -192,6 +190,9 @@ public class GameController implements GameBase {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/win.fxml"));
             Parent root = loader.load();
 
+            WinController winController = loader.getController();
+            winController.setAnswer(answer);
+
             Stage congratulationsStage = new Stage();
             congratulationsStage.setTitle("Hangman Game");
             congratulationsStage.setScene(new Scene(root, 720, 480));
@@ -199,14 +200,6 @@ public class GameController implements GameBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void showWin(ActionEvent e) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("fxml/game.fxml"));
-        Stage window = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        window.setTitle("Hangman Game");
-        window.setScene(new Scene(parent, 720, 480));
-        window.show();
     }
     int life=7;
     public void setImage(){
@@ -223,8 +216,12 @@ public class GameController implements GameBase {
                 img.setImage(image6);
             else if (life == 2)
                 img.setImage(image7);
-            else if (life == 1)
+            else if (life == 1) {
                 img.setImage(image8);
+                for (int i = 0; i < word.length(); i++) {
+                    setLetter(i, Character.toString(word.charAt(i)));
+                }
+            }
 
             life--;
         }

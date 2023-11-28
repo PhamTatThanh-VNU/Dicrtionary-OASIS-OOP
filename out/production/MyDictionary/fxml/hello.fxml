@@ -65,7 +65,7 @@
                </graphic></Button>
          </children></AnchorPane>
       <TextField fx:id="searchBar" layoutX="70.0" layoutY="29.0" prefHeight="40.0" prefWidth="239.0" promptText="Nhập từ cần tìm" />
-      <Button fx:id="searchButton" layoutX="316.0" layoutY="29.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" text="Tìm kiếm" />
+      <Button fx:id="searchButton" layoutX="316.0" layoutY="29.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="52.0" text="Search" />
       <ListView fx:id="listView" layoutX="70.0" layoutY="84.0" prefHeight="361.0" prefWidth="302.0" />
       <WebView fx:id="webView" layoutX="388.0" layoutY="84.0" prefHeight="362.0" prefWidth="325.0" />
       <ButtonBar layoutX="368.0" layoutY="29.0" prefHeight="55.0" prefWidth="343.0">
