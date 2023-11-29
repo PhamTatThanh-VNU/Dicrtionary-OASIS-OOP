@@ -25,7 +25,7 @@ import java.util.Locale;
 import javax.speech.Central;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
-public class DictionaryController implements Initializable {
+public class DictionaryController extends Controller implements Initializable {
 
     public static String temp;
     public static String definition;
@@ -35,18 +35,7 @@ public class DictionaryController implements Initializable {
     ResultSet rset;
     Synthesizer synthesizer = null;
     String test;
-    @FXML
-    private Button st;
-    @FXML
-    private Button google;
-    @FXML
-    private Button add;
-    @FXML
-    private Button his;
-    @FXML
-    private Button star;
-    @FXML
-    private Button game;
+
     @FXML
     private WebView webView;
     @FXML

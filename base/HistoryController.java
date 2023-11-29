@@ -23,20 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HistoryController implements Initializable {
+public class HistoryController extends Controller implements Initializable {
     private String test;
     @FXML
-    private Button st;
-    @FXML
     private Button sql;
-    @FXML
-    private Button add;
-    @FXML
-    private Button star;
-    @FXML
-    private Button google;
-    @FXML
-    private Button game;
     @FXML
     private WebView webView;
     @FXML

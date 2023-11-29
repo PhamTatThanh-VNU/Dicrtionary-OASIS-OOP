@@ -64,7 +64,7 @@
                      </image></ImageView>
                </graphic></Button>
          </children></AnchorPane>
-      <TextField fx:id="add" layoutX="189.0" layoutY="83.0" prefHeight="26.0" prefWidth="203.0" promptText="Nhập từ" />
+      <TextField fx:id="add_one" layoutX="189.0" layoutY="83.0" prefHeight="26.0" prefWidth="203.0" promptText="Nhập từ" />
       <TextField fx:id="phonetic" layoutX="189.0" layoutY="125.0" prefHeight="26.0" prefWidth="203.0" promptText="Nhập phiên âm" />
       <TextArea fx:id="mean" layoutX="189.0" layoutY="212.0" prefHeight="200.0" prefWidth="360.0" promptText="Nhập giải nghĩa" />
       <Label layoutX="76.0" layoutY="86.0" prefHeight="18.0" prefWidth="91.0" text="Từ cần thêm" textFill="WHITE">

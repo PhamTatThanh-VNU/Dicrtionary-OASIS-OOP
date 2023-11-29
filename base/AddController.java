@@ -18,22 +18,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class AddController implements Initializable {
+public class AddController extends Controller implements Initializable {
     boolean check = false;
-    @FXML
-    private Button st;
     @FXML
     private Button sql;
     @FXML
-    private Button his;
-    @FXML
-    private Button star;
-    @FXML
-    private Button google;
-    @FXML
-    private TextField add;
-    @FXML
-    private Button game;
+    private TextField add_one;
     @FXML
     private TextField phonetic;
     @FXML
@@ -55,7 +45,7 @@ public class AddController implements Initializable {
             throw new RuntimeException(e);
         }
         if(DictionaryController.b == true) {
-            add.setText(DictionaryController.temp);
+            add_one.setText(DictionaryController.temp);
             String s = DictionaryController.definition;
             s = s.substring(s.indexOf('/') + 1);
             phonetic.setText(s.substring(0,s.indexOf('/')));
@@ -70,7 +60,7 @@ public class AddController implements Initializable {
             mean.setText(tmpp);
             DictionaryController.b = false;
             String word;
-            word = "delete from dictionary where target = \"" + add.getText() +"\";";
+            word = "delete from dictionary where target = \"" + add_one.getText() +"\";";
             try {
                 con.createStatement().executeUpdate(word);
             } catch (SQLException e) {
@@ -81,7 +71,7 @@ public class AddController implements Initializable {
         apply.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (add.getText().isEmpty() || mean.getText().isEmpty() || phonetic.getText().isEmpty() || type.getText().isEmpty()) {
+                if (add_one.getText().isEmpty() || mean.getText().isEmpty() || phonetic.getText().isEmpty() || type.getText().isEmpty()) {
                     warning2.setText("Bạn hãy điền đủ các trường còn trống");
                 } else if(check == false){
                     warning2.setText("Không thể thêm từ đã có sẵn trong cơ sở dữ liệu");
@@ -90,30 +80,30 @@ public class AddController implements Initializable {
                     String word;
                     String meaning;
                     meaning = mean.getText();
-                    word = "<I><Q>@" + add.getText() + " /" + phonetic.getText() +"/<br />*  " + type.getText() +"<br />";
+                    word = "<I><Q>@" + add_one.getText() + " /" + phonetic.getText() +"/<br />*  " + type.getText() +"<br />";
                     int s = meaning.length();
                     for(int i = 0; i<s;i++){
                         word += (meaning.charAt(i)!='\n'?meaning.charAt(i):"<br />");
                     }
                     word += "</Q></I>";
-                    word = "insert into dictionary (target, definition) values (\"" + add.getText() + "\", \"" + word + "\");";
+                    word = "insert into dictionary (target, definition) values (\"" + add_one.getText() + "\", \"" + word + "\");";
                     try {
                         con.createStatement().executeUpdate(word);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    add.clear();
+                    add_one.clear();
                     phonetic.clear();
                     type.clear();
                     mean.clear();
                 }
                 }
         });
-        add.setOnKeyPressed(new EventHandler<KeyEvent>() {
+        add_one.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 warning2.setText("");
-                String keyword = add.getText() + event.getText();
+                String keyword = add_one.getText() + event.getText();
                 keyword = keyword.toLowerCase();
                 if(!keyword.isEmpty()) {
                     keyword = "select target from dictionary where target = \""+ keyword +"\";";

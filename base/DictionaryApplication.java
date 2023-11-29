@@ -21,7 +21,7 @@ public class DictionaryApplication extends Application {
     }
 
     public static void main(String[] args) {
-        DictionaryManagement.getInstance().InsertFromFile("D:\\UET\\OOP\\Dictionary-OASIS-OOP\\dictionary.txt");
+        DictionaryManagement.getInstance().InsertFromFile("D:\\VNU\\Sophomore(23-24)\\OOP\\finalTestUET\\Dictionary_git_final\\dictionary.txt");
         launch();
         try {
             // Set property as Kevin Dictionary
