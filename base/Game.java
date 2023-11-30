@@ -14,7 +14,7 @@ public class Game implements GameBase {
 
         return g;
     }
-    // lay random ket qua
+
     public Word randomWord() {
         Random rand = new Random();
         ArrayList<Word> words = Dictionary.getInstance().getWords();

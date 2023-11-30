@@ -15,6 +15,7 @@ public class DictionaryManagement {
         if (dm == null)
             dm = new DictionaryManagement();
 
+
         return dm;
     }
     public static String StandardizedWord(String english) {

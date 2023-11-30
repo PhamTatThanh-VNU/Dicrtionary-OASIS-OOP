@@ -21,8 +21,6 @@ import java.util.ResourceBundle;
 public class AddController extends Controller implements Initializable {
     boolean check = false;
     @FXML
-    private Button sql;
-    @FXML
     private TextField add_one;
     @FXML
     private TextField phonetic;

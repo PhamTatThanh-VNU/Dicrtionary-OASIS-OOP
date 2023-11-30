@@ -22,9 +22,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-public class GoogleController extends  Controller implements Initializable {
-    @FXML
-    private Button sql;
+public class GoogleController extends Controller implements Initializable {
     @FXML
     private TextArea textArea1;
     @FXML

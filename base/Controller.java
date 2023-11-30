@@ -14,4 +14,6 @@ public class Controller {
     Button star;
     @FXML
     Button game;
+    @FXML
+    Button sql;
 }

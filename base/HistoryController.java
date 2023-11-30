@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 public class HistoryController extends Controller implements Initializable {
     private String test;
     @FXML
-    private Button sql;
-    @FXML
     private WebView webView;
     @FXML
     private ListView listView;
